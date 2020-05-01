@@ -1,2 +1,35 @@
 1. Closure
 Example1:
+<script type="text/javascript">
+            window.onload = function(){
+                var output = document.getElementById('Output');
+                var closure =  new myClosure2();
+                output.innerHTML = closure.foo();
+                window.setTimeout(function(){
+                    output.innerHTML += '<br />' + closure.foo();
+                }, 500);
+                
+            }
+            function myNonClosure(){
+                var date = new Date();
+                return date.getMilliseconds();
+            }
+            //Class
+            function myClosure(){
+                var date = new Date();
+                return function(){
+                    return date.getMilliseconds();
+                }
+            }
+            //Class
+            var myClosure2 = function(){
+                var date = new Date();
+                var myNestedFunc = function(){
+                    return date.getMilliseconds();
+                };//private
+                return {
+                    foo: myNestedFunc
+                };
+            }
+</script>
+
