@@ -1,3 +1,6 @@
+purpose:
+Reuseable/Maintainance/name conflict
+
 1. Closure
 Example1:
 <script type="text/javascript">
@@ -34,6 +37,7 @@ Example1:
 </script>
 
 2. Prototype
+functions are existing in memory once for reuse. override.
 Example 1:
 #test.js#
 var Calculator = function(eq){
@@ -178,3 +182,78 @@ Calculator.prototype = {
         this.lastNumber = newVal;
     }
 };
+
+3. Module
+each object instance creates new copies of functions in memory; no override
+Similar to Closure.
+Example 1:
+            window.onload = function(){
+                var calc = new Calculator('Output');
+                calc.add(3, 4);
+            }
+
+            var Calculator = function(eq){
+                //private members
+                var eqCtl = document.getElementById(eq);
+                
+                return {
+                    //public
+                    add: function(x, y){
+                        var val = x + y;
+                        eqCtl.innerHTML = val;
+                    }
+                };
+            }
+            
+4. Revealing modules
+self-involking,
+Example 1:
+            window.onload = function(){
+                calculator.doAdd(3, 3);
+                calculator.doSubstract(5, 7);
+            };
+
+            var calculator = function(eq){
+                //private members
+                var eqCtl = document.getElementById(eq),
+                    add = function(x, y) {
+                        eqCtl.innerHTML = x + y;
+                    },
+                    substract = function(x, y){
+                        alert(x - y);
+                    }
+                //public members
+                return{
+                    doAdd: add,
+                    doSubstract: substract
+                };
+            } ('Output');
+ 
+5. Revealing prototype
+
+Example 1:
+            window.onload = function(){
+                var calc = new Calculator('Output');
+                calc.add(3, 9);
+                calc.substract(5, 3);
+            };
+            //constructor
+            var Calculator = function(eq){
+                //state goes here
+                this.eqCtl = document.getElementById(eq);
+            };
+
+            Calculator.prototype = function(){
+                //private members
+                var add = function(x, y){
+                    this.eqCtl.innerHTML = x + y;
+                },
+                substract = function(x, y){
+                    alert(x - y);
+                };
+                //public members
+                return{
+                    add:add,
+                    substract: substract
+                };
+            }();
