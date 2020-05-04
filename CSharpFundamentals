@@ -1,0 +1,33 @@
+1. Define properties
+Example 1:
+        public string Name 
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
+        private string name;
+
+2. property & field
+only in reflection & serialization diff
+Example 1:
+        public string Name
+        {
+            get;
+            private set;
+        }
+        
+3. readonly string category
+only can be changed in constructor
+
+4. public const string CATEGORY 
+treated as static members: classNanme.CATEGORY
+
+5. formatting
+Console.WriteLine($"The average grade is {result:N1}");
+Console.WriteLine($"Hello, {args[0]}!");
