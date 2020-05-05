@@ -31,3 +31,8 @@ treated as static members: classNanme.CATEGORY
 5. formatting
 Console.WriteLine($"The average grade is {result:N1}");
 Console.WriteLine($"Hello, {args[0]}!");
+
+6. pass by reference
+GetBookSetName(ref  Book book, "New Name");
+//out keyword need initialization
+GetBookSetName(out Book book, "New Name");
