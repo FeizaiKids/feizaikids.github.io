@@ -1,0 +1,7 @@
+1.intro
+public class CircularBuffer<T>
+{
+  private T[] _buffer;
+  //...
+}
+var buffer = new CircularBuffer<double>();
