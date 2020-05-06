@@ -1,7 +1,70 @@
-1.intro
+1. intro
 public class CircularBuffer<T>
 {
   private T[] _buffer;
   //...
 }
 var buffer = new CircularBuffer<double>();
+
+2. List
+
+3. Queue
+First In First Out data structure
+Example:
+Queue<Employee> line = new Queue<Employee>();
+line.Enqueue(new Employee {Name = "Alex"});
+line.Enqueue(new Employee {Name = "Dani"});
+line.Enqueue(new Employee {Name = "Chris"});
+
+while(line.Count > 0)
+{
+  var employee = line.Dequeue();
+  Console.WriteLine(employee.Name);//Alex Dani Chris
+}
+
+line.Peek();
+line.Contains();
+line.ToArray();
+
+4. Stack
+Last In First Out data structure
+Example:
+Stack<Employee> line = new Stack<Employee>();
+line.Push(new Employee {Name = "Alex"});
+line.Push(new Employee {Name = "Dani"});
+line.Push(new Employee {Name = "Chris"});
+
+while(line.Count > 0)
+{
+  var employee = line.Pop();
+  Console.WriteLine(employee.Name);//Alex Dani Chris
+}
+
+line.Peek();
+line.Contains();
+line.ToArray();
+
+5. HashSet
+no duplicate item
+Example:
+HashSet<int> set = new HashSet<int>();
+set.Add(1);
+set.Add(2);
+set.Add(2);
+
+foreach(var item in set)
+{
+  Console.WriteLine(item);
+}
+
+var set1 = new HashSet<int>() {1,2,3};
+var set2 = new HashSet<int>() {2,3,4};
+set1.IntersectWith(set2);//set1 : new[] {2,3}
+set1.UnionWith(set2);//set1: new[] {1,2,3,4}
+set1.SymmetricExceptWith(set2);//set1: new[] {1,4} 
+
+
+
+
+
+
