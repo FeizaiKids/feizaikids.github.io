@@ -22,6 +22,14 @@ Example 1:
             private set;
         }
         
+Example 2:
+public class Employee
+{
+        public string Name { get; set;}
+        public int DepartmentId { get; set;}
+}
+Employee e = new Employee{Name = "Scott"};
+        
 3. readonly string category
 only can be changed in constructor
 
