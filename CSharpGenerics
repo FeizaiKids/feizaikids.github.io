@@ -62,7 +62,37 @@ var set2 = new HashSet<int>() {2,3,4};
 set1.IntersectWith(set2);//set1 : new[] {2,3}
 set1.UnionWith(set2);//set1: new[] {1,2,3,4}
 set1.SymmetricExceptWith(set2);//set1: new[] {1,4} 
+---------------for object, reference types is different---------
 
+6. LinkedList
+LinkList<int> list = new LinkedList<int>();
+list.AddFirst(2);
+list.AddFirst(3);
+
+var first = list.First;//not int type
+list.AddAfter(first, 5);
+list.AddBefore(first, 10);
+
+foreach(var item in list)
+{
+  Console.WriteLine(item);
+}
+
+7. Dictionary
+Example:
+var employeesByName = new Dictionary<string, Employee>();
+employeesByName.Add("Scott", new Employee {Name = "Scott"});
+
+var scott = employeesByName["Scott"];
+
+foreach (var item in employeesByName)
+{
+  Console.WriteLine("{0}:{1}", item.Key, item.Value.Name);
+}
+
+8. SortedDictionary/ SortedList/ SortedSet
+SortedDictionary is similar to SortedList
+diff memory usage
 
 
 
