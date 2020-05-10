@@ -143,4 +143,67 @@ Example:
         public bool IsFull { get { return _queue.Count == _capacity; } }
     }
 
+10. IEnumerable<T>
+IEnumerable<T> : IEnumerable
+{
+    IEnumerator<T> GetEnumerator();
+}
+//IEnumerator GetEnumerator();
+
+Example:
+        public IEnumerator<T> GetEnumerator()
+        {
+            //return _queue.GetEnumerator();
+            foreach (var item in _queue)
+            {
+                //...
+                yield return item; //automatically build the state machine to implement IEnumerator<T>, it allows these items to be handed back one at a time in a lazy manner
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() //use explicit interface implementation
+        {
+            return GetEnumerator();
+            
+        }
+        
+11 Other interfaces
+IList<T>                            access by index
+ICollection<T>                      add,remove,search
+IDictionary<K,V>                    access by key
+IReadOnlyCollection<T>              countable collection
+ISet<T>                             set based operation
+IComparer<T>, IEqualityComparer<T>  compare objects
+
+12. compare
+IEqualityComparer<T> 
+
+Example:
+        public class EmployeeComparer : IEqualityComparer<Employee>
+        {
+            public bool Equals(Employee x, Employee y)
+            {
+                return String.Equals(x.Name, y.Name);
+            }
+
+            public int GetHashCode(Employee obj)
+            {
+                return obj.Name.GetHashCode();
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            var departments = new SortedDictionary<string, HashSet<employee>>();
+
+            departments.Add("Sales", new HashSet<Employee>(new EmployeeComparer()));
+            departments["Sales"].Add(new Employee { Name = "Joy" });
+            departments["Sales"].Add(new Employee { Name = "Dani" });
+            departments["Sales"].Add(new Employee { Name = "Dani" });
+
+        }
+
+
+
+
 
