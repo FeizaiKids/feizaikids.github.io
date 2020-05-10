@@ -178,7 +178,7 @@ IComparer<T>, IEqualityComparer<T>  compare objects
 12. compare
 IEqualityComparer<T> 
 
-Example:
+Example 1:
         public class EmployeeComparer : IEqualityComparer<Employee>
         {
             public bool Equals(Employee x, Employee y)
@@ -202,7 +202,25 @@ Example:
             departments["Sales"].Add(new Employee { Name = "Dani" });
 
         }
-
+        
+        Example 2: (restructure)
+        public class DepartmentCollection : SortedDictionary<string, SortedSet<Employee>>
+        {
+          public DepartmentCollection Add(string departmentName, Employee employee)
+          {
+            if(!ContainsKey(departmentName))
+            {
+              Add(departmentName, new SortedSet<Employee>(new EmployeeCompare()));
+            }
+            this[departmentName].Add(employee);
+            return this;
+          }
+        }
+        
+        var departments = new DepartmentCollection();
+        departments.Add("Sales", new Employee {Name = "Joy"})
+                    .Add("Sales", new Employee {Name = "Joy"})
+                    .Add("Sales", new Employee {Name = "Joy"});
 
 
 
