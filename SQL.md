@@ -74,3 +74,35 @@ delete people4;
 delete people5 where [first name] = 'toby';
 delete people5 where [first name] = 'bud' and [last name] = 'abbott';
 ```
+
+#####  create
+```
+create table points
+(
+[x coord] float,
+[y coord] float
+);
+
+create table [points list]
+(
+[position] int identity primary key,
+[x coord] float,
+[y coord] float
+);
+insert into [points list] (position, [x coord], [y coord]) values (10, 2.3, 5.6);
+
+create table People
+(
+[first name] varchar(40) not null,
+[last name] varchar(40) not null,
+[favorite color] varchar(15) null default 'willow blue',
+constraint people_pk primary key ([first name], [last name])
+);
+```
+
+##### alter table
+```
+alter table people add [favorite food] varchar(25) null default 'hot dog' with values;
+
+drop table people;
+```
