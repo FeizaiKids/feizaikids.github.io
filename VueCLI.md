@@ -17,9 +17,19 @@ npm i -g @vue/cli @vue/cli-service-global //cli-service-global: zero-configurati
 </template>
 ```
 
-##### start server
+##### start server 0 configuration
 switch to the folder
 ```
-vue server -o
+vue serve -o
 ```
 
+##### create project
+```
+vue create hello-world -d
+cd hello-world
+npm run serve
+npm run lint
+npm run build
+cd dist
+npx http-server
+```
