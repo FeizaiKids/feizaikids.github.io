@@ -40,3 +40,10 @@ npm run build
 cd dist
 npx http-server
 ```
+
+##### trouble shooting
+```
+vue config
+useTaobaoRegistry true/false
+C:\Users\z0038jwk\.vuerc
+```
