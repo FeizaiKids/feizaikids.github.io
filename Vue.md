@@ -55,6 +55,43 @@ v-if
     </script>
 ```
 
+```
+<h1 v-show="ok">Hello!</h1>
+//
+不同的是带有 v-show 的元素始终会被渲染并保留在 DOM 中。v-show 只是简单地切换元素的 CSS property display。
+因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+```
+
+```
+    <div id="app-3">
+        <template v-if="ok">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+          </template>
+    </div>
+    <script type="text/javascript">
+        var app3 = new Vue({
+            el: '#app-3',
+            data: {
+                ok: true
+            }
+        })
+    </script>
+```
+
+```
+//添加key，重新渲染
+<template v-if="loginType === 'username'">
+  <label>Username</label>
+  <input placeholder="Enter your username" key="username-input">
+</template>
+<template v-else>
+  <label>Email</label>
+  <input placeholder="Enter your email address" key="email-input">
+</template>
+```
+
 v-for
 ```
     <div id="app-4">
@@ -79,6 +116,27 @@ v-for
     
     //app4.todos.push({ text: '新项目' })
 ```
+
+```
+    <ul id="example-2">
+        <li v-for="(item, index) in items">
+            {{ parentMessage }} - {{ index }} - {{ item.message }}
+        </li>
+    </ul>
+    <script type="text/javascript">
+        var example2 = new Vue({
+            el: '#example-2',
+            data: {
+                parentMessage: 'Parent',
+                items: [
+                    { message: 'Foo' },
+                    { message: 'Bar' }
+                ]
+            }
+        })
+    </script>
+```
+for more use: https://cn.vuejs.org/v2/guide/list.html
 
 v-on 事件监听器
 ```
@@ -475,3 +533,238 @@ data: {
 <div v-bind:class="[{ active: isActive }, errorClass]"></div>
 ```
 
+##### 事件 https://cn.vuejs.org/v2/guide/events.html
+
+##### 表单输入绑定 https://cn.vuejs.org/v2/guide/forms.html
+
+##### 组件基础
+因为组件是可复用的 Vue 实例，所以它们与 new Vue 接收相同的选项，例如 data、computed、watch、methods 以及生命周期钩子等。仅有的例外是像 el 这样根实例特有的选项。
+
+一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝：
+```
+    <div id="components-demo">
+        <button-counter></button-counter>
+    </div>
+    <script type="text/javascript">
+        Vue.component('button-counter', {
+            data: function () {
+                return {
+                    count: 0
+                }
+            },
+            template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+        })
+
+        var vm = new Vue({ el: '#components-demo' });
+    </script>
+```
+
+```
+    <div id="test">
+        <blog-post title="My journey with Vue"></blog-post>
+        <blog-post title="Blogging with Vue"></blog-post>
+        <blog-post title="Why Vue is so fun"></blog-post>
+    </div>
+
+    <script type="text/javascript">
+        Vue.component('blog-post', {
+            props: ['title'],
+            template: '<h3>{{ title }}</h3>'
+        })
+        var vm = new Vue({ el: '#test' });
+    </script>
+```
+
+```
+    <div id="test">        
+        <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:title="post.title"></blog-post>
+    </div>
+
+    <script type="text/javascript">
+        Vue.component('blog-post', {
+            props: ['title'],
+            template: '<h3>{{ title }}</h3>'
+        })
+
+        new Vue({
+            el: '#test',
+            data: {
+                posts: [
+                    { id: 1, title: 'My journey with Vue' },
+                    { id: 2, title: 'Blogging with Vue' },
+                    { id: 3, title: 'Why Vue is so fun' }
+                ]
+            }
+        })
+    </script>
+```
+
+```
+    <div id="test">
+        <blog-post v-for="post in posts" v-bind:id="post.id" v-bind:title="post.title"></blog-post>
+    </div>
+
+    <script type="text/javascript">
+        Vue.component('blog-post', {
+            props: ['title', 'id'],
+            template: `
+    <div class="blog-post">
+        <h3>{{ title }}</h3>
+        <h3>{{ id }}</h3>
+    </div>
+  `
+        })
+
+        new Vue({
+            el: '#test',
+            data: {
+                posts: [
+                    { id: 1, title: 'My journey with Vue' },
+                    { id: 2, title: 'Blogging with Vue' },
+                    { id: 3, title: 'Why Vue is so fun' }
+                ]
+            }
+        })
+```
+
+```
+    <div id="test">
+        <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post"></blog-post>
+    </div>
+
+    <script type="text/javascript">
+        Vue.component('blog-post', {
+            props: ['post'],
+            template: `
+    <div class="blog-post">
+      <h3>{{ post.title }}</h3>
+      <h3>{{ post.id }}</h3>
+      <div v-html="post.content"></div>
+    </div>
+  `
+        })
+
+        new Vue({
+            el: '#test',
+            data: {
+                posts: [
+                    { id: 1, title: 'My journey with Vue' },
+                    { id: 2, title: 'Blogging with Vue' },
+                    { id: 3, title: 'Why Vue is so fun' }
+                ]
+            }
+        })
+    </script>
+```
+监听
+```
+    <div id="test">
+        <div :style="{fontSize: postFontSize + 'em' }">
+            <blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post" v-on:enlarge-text="postFontSize += 0.1"></blog-post>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        Vue.component('blog-post', {
+            props: ['post'],
+            template: `
+    <div>
+    <button v-on:click="$emit('enlarge-text')">
+        Enlarge text
+    </button>
+      <h3>{{ post.title }}</h3>
+      <h3>{{ post.id }}</h3>
+      <div v-html="post.content"></div>
+    </div>
+  `
+        })
+
+        new Vue({
+            el: '#test',
+            data: {
+                posts: [
+                    { id: 1, title: 'My journey with Vue' },
+                    { id: 2, title: 'Blogging with Vue' },
+                    { id: 3, title: 'Why Vue is so fun' }
+                ],
+                postFontSize: 1
+            }
+        })
+    </script>
+```
+
+```
+<button v-on:click="$emit('enlarge-text', 0.1)">
+  Enlarge text
+</button>
+
+<blog-post
+  ...
+  v-on:enlarge-text="postFontSize += $event"
+></blog-post>
+
+///or
+methods: {
+  onEnlargeText: function (enlargeAmount) {
+    this.postFontSize += enlargeAmount
+  }
+}
+```
+v-model
+<input v-model="searchText"> 等同于
+<input
+  v-bind:value="searchText"
+  v-on:input="searchText = $event.target.value"
+>
+```
+    <div id="test">
+        <custom-input v-model="searchText">
+    </div>
+
+    <script type="text/javascript">
+        Vue.component('custom-input', {
+            props: ['value'],
+            template: `
+            <input
+            v-bind:value="value"
+            v-on:input="$emit('input', $event.target.value)"
+            >
+            `
+        })
+
+        var vm = new Vue({
+            el: '#test',
+            data: {
+                searchText: 'david beckham'
+            }
+        })
+    </script>
+```
+
+slot
+```
+    <div id="test">
+        <alert-box>
+            Something bad happened.
+        </alert-box>
+    </div>
+
+    <script type="text/javascript">
+        Vue.component('alert-box', {
+            template: `
+    <div>
+      <strong>Error!</strong>
+      <slot></slot>
+    </div>
+  `
+        })
+
+        var vm = new Vue({
+            el: '#test',
+            data: {
+                searchText: 'david beckham'
+            }
+        })
+    </script>
+
+```
