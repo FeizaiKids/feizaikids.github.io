@@ -6,6 +6,11 @@ node --version
 npm -v
 ```
 
+##### cnpm
+```
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+```
+
 ##### install vue cli
 ```
 npm i -g @vue/cli @vue/cli-service-global //cli-service-global: zero-configuration
