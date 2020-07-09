@@ -7,6 +7,7 @@ npm -v
 ```
 
 ##### cnpm
+optional to use.
 ```
 npm install -g cnpm --registry=https://registry.npm.taobao.org
 ////
@@ -42,8 +43,21 @@ npx http-server
 ```
 
 ##### trouble shooting
+
 ```
+//set up proxy
+npm config set proxy http://z003anxy:Siemens2020@140.231.192.162:8080
+npm config set https-proxy http://z003anxy:Siemens2020@140.231.192.162:8080
+
+//set up vue proxy if necessary
 vue config
 useTaobaoRegistry true/false
 C:\Users\z0038jwk\.vuerc
+```
+
+##### install required plugin
+```
+npm i vue-router -D
+npm i axios -D
+vue add element
 ```
