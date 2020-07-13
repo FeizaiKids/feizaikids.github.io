@@ -61,3 +61,12 @@ npm i vue-router -D
 npm i axios -D
 vue add element
 ```
+
+##### vuex
+```
+//optional
+npm install vuex --save
+
+vuex数据持久话插件，将state里面的数据保存到localstorage
+npm install vuex-persistedstate --save
+```
