@@ -106,3 +106,11 @@ alter table people add [favorite food] varchar(25) null default 'hot dog' with v
 
 drop table people;
 ```
+
+##### 
+```
+重置自增长数
+dbcc checkident([Asset],RESEED,0)
+查询自增长数
+dbcc checkident([表名],NORESEED)
+```
