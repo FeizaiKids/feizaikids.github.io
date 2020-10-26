@@ -114,3 +114,39 @@ dbcc checkident([Asset],RESEED,0)
 查询自增长数
 dbcc checkident([表名],NORESEED)
 ```
+
+##### 单表去重
+每个字段都判断
+```
+select distinct PurchaseOrder, SupplierName, Currency, AcquisVal, AccumDep, BookVal, CapDate, FirstAcq, APCAcct, Linkman, FiscalYear from PurchasingInfo
+```
+
+```
+--transform step
+  SELECT DISTINCT PurchaseOrder, SupplierName, Currency, AcquisVal, AccumDep, BookVal, CapDate, FirstAcq, APCAcct, Linkman, FiscalYear
+  
+  , STUFF((SELECT ',' + AssetNoTmp FROM PurchasingInfo WHERE ((PurchaseOrder = T.PurchaseOrder or PurchaseOrder is null) and 
+	(SupplierName = T.SupplierName or SupplierName is null) and	 
+	(Currency = T.Currency or Currency is null) and
+	(AcquisVal = T.AcquisVal or AcquisVal is null) and
+    (AccumDep = T.AccumDep or AccumDep is null) and
+	(BookVal = T.BookVal or BookVal is null) and
+	(CapDate = T.CapDate or CapDate is null) and
+	(FirstAcq = T.FirstAcq or FirstAcq is null) and
+	(APCAcct = T.APCAcct or APCAcct is null) and
+	(Linkman = T.Linkman or Linkman is null) and
+	(FiscalYear = T.FiscalYear or FiscalYear is null)
+  ) FOR XML PATH('')), 1, 1, '') AS AssetNoTmp into #Tmp FROM PurchasingInfo AS T
+  --end of transform
+
+
+  --delete PurchasingInfo
+
+  --dbcc checkident([PurchasingInfo],RESEED,0)
+
+  drop table PurchasingInfo
+
+  select * into PurchasingInfo from #Tmp
+
+  drop table #Tmp
+```
