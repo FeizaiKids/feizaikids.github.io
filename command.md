@@ -19,3 +19,6 @@ choco source remove -n=bob
 choco source add -n=energy-dev-choco -s="https://siemens.jfrog.io/artifactory/api/nuget/energy-dev-choco" -u="yifei.song@siemens.com" -p=YOURACCESSTOKEN
 
 choco install <chocoPackageName>
+  
+更改choco的proxy
+C:\ProgramData\chocolatey\config
