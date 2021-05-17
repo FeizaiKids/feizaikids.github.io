@@ -20,9 +20,12 @@ choco source add -n=energy-dev-choco -s="https://siemens.jfrog.io/artifactory/ap
 
 choco install <chocoPackageName>
   
+choco list -local
+  
 更改choco的proxy
 C:\ProgramData\chocolatey\config
 
 #### PowerShell Commands
 
 Get-InstalledModule
+
