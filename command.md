@@ -1,4 +1,4 @@
-##### Chocolatey command
+#### Chocolatey Commands
 
 choco source
 
@@ -22,3 +22,7 @@ choco install <chocoPackageName>
   
 更改choco的proxy
 C:\ProgramData\chocolatey\config
+
+#### PowerShell Commands
+
+Get-InstalledModule
