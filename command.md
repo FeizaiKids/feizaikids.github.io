@@ -29,3 +29,15 @@ C:\ProgramData\chocolatey\config
 
 Get-InstalledModule
 
+Install-Module
+       [-Name] <String[]>
+       [-MinimumVersion <String>]
+       [-MaximumVersion <String>]
+       [-RequiredVersion <String>]
+       [-Repository <String[]>]
+       [-Credential <PSCredential>]
+       [-Scope <String>]
+       [-Proxy <Uri>]
+       [-ProxyCredential <PSCredential>]
+       [-AllowClobber]
+       [-SkipPublisherCheck]
