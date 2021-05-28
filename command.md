@@ -41,3 +41,5 @@ Install-Module
        [-ProxyCredential <PSCredential>]
        [-AllowClobber]
        [-SkipPublisherCheck]
+  
+  Get-PSRepository
