@@ -1,3 +1,4 @@
+### Ali Cloud Deployment
 ##### Install Core Images
 ```
 docker pull mcr.microsoft.com/dotnet/aspnet:3.1
@@ -22,4 +23,9 @@ docker build -t digitalfactory .
 docker login --username=siemensspa registry.cn-hangzhou.aliyuncs.com
 docker tag a6f9992e6510 registry.cn-hangzhou.aliyuncs.com/spa1/spa-mf-test:1.0.0
 docker push registry.cn-hangzhou.aliyuncs.com/spa1/spa-mf-test:1.0.0
+```
+* * *
+### Commands
+```
+docker image list
 ```
