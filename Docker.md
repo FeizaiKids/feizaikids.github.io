@@ -30,5 +30,16 @@ docker push registry.cn-hangzhou.aliyuncs.com/spa1/spa-mf-test:1.0.0
 docker image ls
 ```
 ```
+//run in the backend
 docker container run -d --name web -p 8000:8080
+
+//run iteractive way
+docker container run -it --name test alpine sh
+```
+```
+docker container stop web
+docker container start web
+```
+```
+docker container rm web
 ```
