@@ -27,5 +27,5 @@ docker push registry.cn-hangzhou.aliyuncs.com/spa1/spa-mf-test:1.0.0
 * * *
 ### 2. Commands
 ```
-docker image list
+docker image ls
 ```
