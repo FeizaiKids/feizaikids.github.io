@@ -29,3 +29,6 @@ docker push registry.cn-hangzhou.aliyuncs.com/spa1/spa-mf-test:1.0.0
 ```
 docker image ls
 ```
+```
+docker container run -d --name web -p 8000:8080
+```
