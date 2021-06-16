@@ -20,9 +20,16 @@ docker build -t digitalfactory .
 ```
 ##### Push Image to Ali Cloud
 ```
+//阿里云
 docker login --username=siemensspa registry.cn-hangzhou.aliyuncs.com
 docker tag a6f9992e6510 registry.cn-hangzhou.aliyuncs.com/spa1/spa-mf-test:1.0.0
 docker push registry.cn-hangzhou.aliyuncs.com/spa1/spa-mf-test:1.0.0
+```
+```
+//Azure
+docker login spamftestmscontainer.azurecr.io
+docker tag 3e58988d5ae4 spamftestmscontainer.azurecr.io/digitalfactory:1.0.1
+docker push spamftestmscontainer.azurecr.io/digitalfactory:1.0.1
 ```
 * * *
 ### 2. Commands
